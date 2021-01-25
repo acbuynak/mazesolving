@@ -4,6 +4,8 @@ from mazes import Maze
 from factory import SolverFactory
 Image.MAX_IMAGE_PIXELS = None
 
+import csv
+
 # Read command line arguments - the python argparse class is convenient here.
 import argparse
 
@@ -73,6 +75,16 @@ def solve(factory, method, input_file, output_file):
 
     im.save(output_file)
 
+    """
+    Output CSV of resultant path
+    """
+    print("\nSaving Solved Path as CSV (row,col)(top->bot)")
+    print(resultpath)
+    with open('path_soln.csv', 'w', newline='') as csvfile:
+        write = csv.writer(csvfile, delimiter=',')
+        for i in resultpath:
+            write.writerow(i)
+        csvfile.close()
 
 def main():
     sf = SolverFactory()
